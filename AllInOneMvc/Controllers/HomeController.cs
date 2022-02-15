@@ -15,7 +15,10 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var greating = new GreatingModel{
+            FirstName = "YourFirstName"
+        };
+        return View(greating);
     }
 
     public IActionResult Privacy()
