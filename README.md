@@ -108,3 +108,87 @@ When you have had enough looking at your website go back to the terminal and hit
 Feel free to have a look around in the editor, look at `Views/Home/Index.cshtml` try making changes and restarting the website. Have a look at `Program.cs` and `Controllers/HomeController.cs`, Program.cs may not make a lot of sense yet. HomeController does not do alot yet. 
 
 When you are ready carry on to Step 2
+
+
+### Step 2
+We are going to add a simple Greating Model, set some values in the controller and display these in the view.
+
+### Step 2.1
+Create a new file `Models/GreatingModel.cs`
+
+Add the following text to your new file
+
+    namespace AllInOneMvc.Models
+	{
+	    public class GreatingModel
+	    {
+	        public string? FirstName{get; set;}
+	    }
+	}
+
+
+This creates a place to store a FirstName. 
+
+The `namespace` keyword gives GreatingModel the full name AllInOneMvc.Models.GreatingModel. This helps other code refer to the correct class.
+The keyword `public` means other code can see and use the class `GreatingModel` and the `FirstName` property.
+
+### Step 2.2
+Save and Compile
+Save the changes to your file and in your terminal type:
+
+    dotnet build
+
+Hopefully it will respond with text ending with
+
+	Build succeeded.
+	    0 Warning(s)
+	    0 Error(s)
+     
+	Time Elapsed 00:00:04.07
+
+If not read the warnings and errors, look for red or yellow underlined words in your code for hints about what has gone wrong. Holding your mouse over these will give more details on the problem. 
+
+### Step 2.3
+Use the new class and property in the View.
+Open `Views/Home/Index.cshtml` in your editor.
+Add a new line at the start of the file
+
+    @model AllInOneMvc.Models.GreatingModel
+
+This tells this page that the Model passed to it will always be a greating Model. 
+
+Change the line
+
+    <h1 class="display-4">Welcome</h1>
+
+To 
+
+    <h1 class="display-4">Welcome @Model.FirstName</h1>
+
+Save the file.
+
+### Step 2.4
+Save all your changes and check that everything compiles just like you did in step 2.2.
+
+### Step 2.5
+Change the controller to assign your name to the GreatingModel. 
+Open `Controllers/HomeController.cs` in your editor. 
+Find the Index method and replace it with the following:
+
+    public IActionResult Index()
+    {
+        var greating = new GreatingModel{
+            FirstName = "YourFirstName"
+        };
+        return View(greating);
+    }
+
+Save your changes and compile to check that there are no problems.
+
+### Step 2.6
+Run your website again just like we did in Step 1.5, when you open your site in your browser you now see you are being welcomed personally. 
+
+For your next steps see [the next branch](https://github.com/dwat001/dotnet-ef-starter/tree/Flow1.Step3)
+
+
+
